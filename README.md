@@ -2,9 +2,9 @@
 
 Aplikasi CodeIgniter 4 + PHP 8.3 untuk analisis teknikal saham Indonesia (suffix `.JK`) menggunakan metode **Confluence System** dengan 3 candle indikator:
 
-- **Candle 1 (Trend & Momentum):** EMA20/EMA50 + MACD(12,26,9)
-- **Candle 2 (Overbought/Oversold):** RSI(14) + Stochastic(14,3)
-- **Candle 3 (Volume & Volatilitas):** Volume Spike + Bollinger Bands(20,2)
+- **P 1 (Trend & Momentum):** EMA20/EMA50 + MACD(12,26,9)
+- **P 2 (Overbought/Oversold):** RSI(14) + Stochastic(14,3)
+- **P 3 (Volume & Volatilitas):** Volume Spike + Bollinger Bands(20,2)
 
 Output: rekomendasi **BUY / SELL / HOLD** + **confidence (STRONG/MODERATE/WEAK)** + skor per pilar.
 
