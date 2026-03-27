@@ -8,9 +8,6 @@ Aplikasi CodeIgniter 4 + PHP 8.3 untuk analisis teknikal saham Indonesia (suffix
 
 Output: rekomendasi **BUY / SELL / HOLD** + **confidence (STRONG/MODERATE/WEAK)** + skor per pilar.
 
-Dokumen acuan implementasi ada di:
-- `bluprint.md`
-- `phase.md`
 
 ## Disclaimer
 Analisis ini bersifat edukatif dan bukan ajakan membeli/menjual. Keputusan investasi sepenuhnya tanggung jawab pengguna.
@@ -21,7 +18,6 @@ Analisis ini bersifat edukatif dan bukan ajakan membeli/menjual. Keputusan inves
 - Composer
 
 ## Instalasi (Local)
-Di root project:
 
 ```bash
 composer install
