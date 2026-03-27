@@ -1,56 +1,55 @@
-# Stock Analyst CI4 (Indonesia) — Confluence System (3 Pilar)
+# Stock Analyst CI4  — Confluence System (3 Pillars)
 
-Aplikasi CodeIgniter 4 + PHP 8.3 untuk analisis teknikal saham Indonesia (suffix `.JK`) menggunakan metode **Confluence System** dengan 3 candle indikator:
+A CodeIgniter 4 + PHP 8.3 application for technical analysis of Indonesian / etc stocks (suffix `.JK`) using the **Confluence System** with 3 candle indicators:
 
 - **P 1 (Trend & Momentum):** EMA20/EMA50 + MACD(12,26,9)
 - **P 2 (Overbought/Oversold):** RSI(14) + Stochastic(14,3)
-- **P 3 (Volume & Volatilitas):** Volume Spike + Bollinger Bands(20,2)
+- **P 3 (Volume & Volatility):** Volume Spike + Bollinger Bands(20,2)
 
-Output: rekomendasi **BUY / SELL / HOLD** + **confidence (STRONG/MODERATE/WEAK)** + skor per pilar.
-
+Output: **BUY / SELL / HOLD** recommendation + **confidence (STRONG/MODERATE/WEAK)** + score per pillar.
 
 ## Disclaimer
-Analisis ini bersifat edukatif dan bukan ajakan membeli/menjual. Keputusan investasi sepenuhnya tanggung jawab pengguna.
+This analysis is for educational purposes only and is not a solicitation to buy or sell. Investment decisions are entirely the responsibility of the user.
 
 ## Requirements
 - PHP **8.3+**
 - Extensions: `curl`, `json`, `mbstring`, `intl`
 - Composer
 
-## Instalasi (Local)
+## Installation (Local)
 
 ```bash
 composer install
 ```
 
-Copy `env` menjadi `.env`, lalu set minimal:
+Copy `env` to `.env`, then set at least:
 
 ```dotenv
 app.baseURL = 'http://localhost/ci4-stock-mangido/public/'
 ```
 
-Jalankan server dev:
+Run the dev server:
 
 ```bash
 php spark serve
 ```
 
-## Routes / Halaman
-- Dashboard multi-saham: `GET /dashboard`
-- Detail saham: `GET /stock/{SYMBOL}` contoh: `/stock/ACES.JK`
+## Routes / Pages
+- Multi‑stock dashboard: `GET /dashboard`
+- Stock detail: `GET /stock/{SYMBOL}` e.g. `/stock/ACES.JK`
 
-Catatan: jika symbol tidak memakai `.JK`, controller akan menambahkan otomatis.
+Note: if the symbol does not include `.JK`, the controller will add it automatically.
 
-## Konsep Output (Singkat)
-- `Chg%`: perubahan persen harga (dari Yahoo Finance `regularMarketChangePercent`)
-- `Reco`: rekomendasi final dari confluence 3 pilar
-- `P1/P2/P3`: status masing-masing pilar (`BULLISH/BEARISH/NETRAL`) — hover (tooltip) menampilkan detail sinyal indikator
+## Output Concept (Brief)
+- `Chg%`: percent price change (from Yahoo Finance `regularMarketChangePercent`)
+- `Reco`: final recommendation based on the confluence of the 3 pillars
+- `P1/P2/P3`: status of each pillar (`BULLISH/BEARISH/NEUTRAL`) — hover (tooltip) shows detailed indicator signals
 
-## Caching (Sesuai Blueprint)
-- CI4 File Cache: data historis & hasil analisis
-- PSR-6 Symfony Cache: context Yahoo (cookie/crumb) di `writable/cache/psr6`
+## Caching (As per Blueprint)
+- CI4 File Cache: historical data & analysis results
+- PSR-6 Symfony Cache: Yahoo context (cookie/crumb) stored in `writable/cache/psr6`
 
-Variabel `.env` yang dipakai (default sudah disediakan):
+Environment variables used (defaults are already provided):
 - `YAHOO_CACHE_TTL` (default 3600)
 - `YAHOO_QUOTES_CACHE_TTL` (default 600)
 - `YAHOO_STALE_CACHE_TTL` (default 86400)
@@ -59,14 +58,14 @@ Variabel `.env` yang dipakai (default sudah disediakan):
 - `ANALYSIS_CACHE_TTL` (default 3600)
 - `ANALYSIS_STALE_CACHE_TTL` (default 86400)
 
-## Database (Opsional)
-Database tidak wajib. Jika ingin menyimpan histori analisis, gunakan `app/Models/AnalysisModel.php` dan buat tabel `analysis_results` (belum ada migrasi).
+## Database (Optional)
+A database is not required. If you want to store analysis history, use `app/Models/AnalysisModel.php` and create the `analysis_results` table (no migration provided yet).
 
-## Menambah Daftar Saham Dashboard
-Edit daftar symbol di:
+## Adding Stocks to the Dashboard
+Edit the list of symbols in:
 - `app/Controllers/Dashboard.php`
 
-Pastikan format `.JK`, contoh:
+Make sure to use the `.JK` format, e.g.:
 
 ```php
 'CENT.JK',
@@ -74,12 +73,12 @@ Pastikan format `.JK`, contoh:
 ```
 
 ## Testing
-Jalankan unit test:
+Run unit tests:
 
 ```bash
 composer test
 ```
 
 ## Troubleshooting
-- Jika muncul halaman **Whoops**, cek log CI4 di `writable/logs/`.
-- Jika garis EMA/Bollinger tidak muncul di chart, pastikan data historis cukup dan halaman tidak memakai cache lama yang kosong; refresh ulang setelah TTL.
+- If a **Whoops** page appears, check the CI4 logs in `writable/logs/`.
+- If EMA/Bollinger lines do not appear on the chart, ensure sufficient historical data is available and the page is not using an old empty cache; refresh after the TTL has passed.
